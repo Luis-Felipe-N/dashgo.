@@ -12,7 +12,7 @@ export default function NavSection({ title, children }: INavSection) {
         <Box>
             <Text fontWeight="bold" fontSize="small" color="gray.400">{title}</Text>
             <Stack spacing="4" mt="8">
-                {children  }
+                {children}
             </Stack>
         </Box>
     )

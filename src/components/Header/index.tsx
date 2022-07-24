@@ -1,4 +1,4 @@
-import { Flex, Input, Text, Icon, HStack, Avatar, Box } from "@chakra-ui/react";
+import { Flex, Input, Text, Icon, HStack, Avatar, Box, useBreakpointValue } from "@chakra-ui/react";
 import { RiSearch2Line, RiNotificationLine, RiUserAddLine } from 'react-icons/ri'
 import Logo from "./Logo";
 import NotificationNav from "./NotificationNav";
@@ -6,6 +6,10 @@ import Profile from "./Profile";
 import Search from "./Search";
 
 export function Header() {
+    const showAllProfile = useBreakpointValue({
+        base: false,
+        lg: true
+    })
     return (
         <Flex 
             as="header"
@@ -26,7 +30,7 @@ export function Header() {
                 ml="auto"
             >
                 <NotificationNav />
-                <Profile /> 
+                <Profile showAllProfile={showAllProfile} /> 
             </Flex>
         </Flex>
     )
