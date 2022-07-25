@@ -3,6 +3,8 @@ import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import SideBar from "../../components/SideBar";
 
+import Link from 'next/link'
+
 export default function UserList() {
     return (
         <Box>
@@ -37,11 +39,13 @@ export default function UserList() {
                     </VStack>
                     <Flex mt="8" justify="flex-end" >
                         <HStack spacing="4">
-                            <Button
-                                colorScheme="whiteAlpha"
-                            >
-                                Cancelar
-                            </Button>
+                            <Link href="/users" passHref>
+                                <Button
+                                    colorScheme="whiteAlpha"
+                                >
+                                    Cancelar
+                                </Button>
+                            </Link>
                             <Button
                                 colorScheme="pink"
                             >

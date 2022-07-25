@@ -4,6 +4,8 @@ import { Header } from "../../components/Header";
 import Pagination from "../../components/Pagination/Index";
 import SideBar from "../../components/SideBar";
 
+import Link from 'next/link'
+
 export default function UserList() {
     const isWideVersion = useBreakpointValue({
         base: false,
@@ -36,13 +38,15 @@ export default function UserList() {
                         >
                             Usuários
                         </Heading>
-                        <Button
-                            as="a"
-                            colorScheme="pink"
-                            leftIcon={<Icon as={RiAddLine} />}
-                        >
-                            Criar novo
-                        </Button>
+                        <Link href="/users/create" passHref>
+                            <Button
+                                as="a"
+                                colorScheme="pink"
+                                leftIcon={<Icon as={RiAddLine} />}
+                            >
+                                Criar novo
+                            </Button>
+                        </Link>
                     </Flex>
                     <Table colorScheme="whiteAlpha">
                         <Thead>
