@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         w="100%"
         maxW={360}
         bg="gray.800"
-        p="8"
+        p={["4", "8"]}
         borderRadius="8px"
         flexDir="column"
       >

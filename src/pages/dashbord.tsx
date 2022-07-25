@@ -68,7 +68,7 @@ export default function Dashbord() {
                 <SimpleGrid flex="1" gap="4" minChildWidth={330}>
                     <Box
                         bg="gray.800"
-                        p="8"
+                        p={["4", "8"]}
                         pb="4"
                         borderRadius={8}
                     >
@@ -82,7 +82,7 @@ export default function Dashbord() {
                     </Box>
                     <Box
                         bg="gray.800"
-                        p="8"
+                        p={["4", "8"]}
                         pb="4"
                         borderRadius={8}
                     >
