@@ -1,11 +1,38 @@
+import Link from 'next/link'
+
 import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
 import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import SideBar from "../../components/SideBar";
 
-import Link from 'next/link'
+interface CreateUserFormProps {
+    name: string;
+    email: string;
+    password: string;
+    password_confimation: string
+}
+
+const createUserFormSchema = yup.object().shape({
+    name: yup.string().required('Nome é obrigatório'),
+    email: yup.string().required("E-mail obrigatório").email("O campo precisa ser um email válido"),
+    password: yup.string().required("Senha obrigatória").min(6, 'Senha de no minímo 6 caracteres'),
+    password_confimation: yup.string().oneOf([null, yup.ref('password')], 'As senhas não batem')
+});
 
 export default function UserList() {
+    const { register, handleSubmit, formState } = useForm({
+        resolver: yupResolver(createUserFormSchema)
+    })
+
+    const handleCreateUser: SubmitHandler<FieldValues> = async data => {
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        console.log(data)
+    }
+
     return (
         <Box>
             <Header />
@@ -22,6 +49,8 @@ export default function UserList() {
                     bg="gray.800"
                     p="6"
                     borderRadius="8"
+                    as="form"
+                    onSubmit={handleSubmit(handleCreateUser)}
                 >
                     <Heading size="lg" fontWeight="normal">
                         Criar usuário
@@ -29,12 +58,34 @@ export default function UserList() {
                     <Divider my="6" borderColor="gray.600" />  
                     <VStack spacing="8">
                         <SimpleGrid minChildWidth={240} spacing="8" w="100%">
-                            <Input name="name" label="Nome do usuário" />
-                            <Input name="email" type="email" label="Email" />
+                           <Input
+                              {...register("name")}
+                              error={formState.errors.name}
+                              name="name"
+                              label="Nome do usuário"
+                              />
+                            <Input
+                              {...register("email")}
+                              error={formState.errors.email}
+                              name="email"
+                              type="email"
+                              label="Email"
+                              />
                         </SimpleGrid>
                         <SimpleGrid minChildWidth={240} spacing="8" w="100%">
-                            <Input name="password" type="password" label="Senha" />
-                            <Input name="password_confimation" type="password" label="Confirmação da senha" />
+                            <Input
+                              {...register("password")}
+                              error={formState.errors.password}
+                              name="password"
+                              type="password"
+                              label="Senha"
+                              />
+                            <Input
+                              {...register("password_confimation")}
+                              error={formState.errors.password_confimation}
+                              name="password_confimation"
+                              type="password"
+                              label="Confirmação da senha" />
                         </SimpleGrid>
                     </VStack>
                     <Flex mt="8" justify="flex-end" >
@@ -48,6 +99,8 @@ export default function UserList() {
                             </Link>
                             <Button
                                 colorScheme="pink"
+                                type="submit"
+                                isLoading={formState.isSubmitting}
                             >
                                 Salvar
                             </Button>

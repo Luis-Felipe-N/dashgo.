@@ -1,49 +1,67 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { Flex, Button, Stack, Box } from "@chakra-ui/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Flex, Stack } from '@chakra-ui/react'
-import { Input } from '../components/Form/Input'
+import { Input } from "../components/Form/Input";
 
-const Home: NextPage = () => {
+interface SignInFormProps {
+  email: string;
+  password: string;
+}
+
+const signInFormSchema = yup.object().shape({
+  email: yup.string().required("E-mail obrigatório").email("O campo precisa ser um email válido"),
+  password: yup.string().required("Senha obrigatória")
+});
+
+export default function SignIn() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(signInFormSchema)
+  });
+
+  const handleSignIn: SubmitHandler<SignInFormProps> = async data => {
+    console.log(data);
+  };
+
   return (
-    <Flex
-      w="100vw"
-      h="100vh"
-      align="center"
-      justify="center"
-    >
+    <Flex w="100vw" h="100vh" align="center" justify="center">
       <Flex
         as="form"
         w="100%"
         maxW={360}
         bg="gray.800"
-        p={["4", "8"]}
-        borderRadius="8px"
+        p="8"
+        borderRadius={8}
         flexDir="column"
+        onSubmit={handleSubmit(handleSignIn)}
       >
-        <Stack spacing={4}>
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-        />
-        
-        <Input
-          name="password"
-          label="Senha"
-          type="password"
-        />
+        <Stack spacing="4">
+          <Input
+            {...register("email")}
+            name="email"
+            label="E-mail"
+            type="email"
+            error={formState.errors.email}
+          />
+          <Input
+            {...register("password")}
+            name="password"
+            label="Senha"
+            type="password"
+            error={formState.errors.password}
+          />
         </Stack>
         <Button
-          colorScheme="pink"
+          type="submit"
           mt="6"
-        > 
-          Entrar</Button>
+          colorScheme="pink"
+          size="lg"
+          isLoading={formState.isSubmitting}
+        >
+          Entrar
+        </Button>
       </Flex>
     </Flex>
-  )
+  );
 }
-
-export default Home
