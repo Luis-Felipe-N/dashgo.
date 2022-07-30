@@ -1,13 +1,14 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Th, Thead, Tr, Text, Td, useBreakpointValue, Spinner, useRadio } from "@chakra-ui/react";
 import { RiAddLine } from "react-icons/ri";
+import Link from 'next/link'
+
 import { Header } from "../../components/Header";
 import Pagination from "../../components/Pagination/Index";
 import SideBar from "../../components/SideBar";
 
-import { useQuery } from '@tanstack/react-query'
+import { IUser } from "../../types/Users";
+import { useUsers } from "../../hooks/useUsers";
 
-import Link from 'next/link'
-import { useEffect } from "react";
 
 export default function UserList() {
     const isWideVersion = useBreakpointValue({
@@ -15,23 +16,7 @@ export default function UserList() {
         lg: true
     })
 
-    const { isLoading, data, error } = useQuery(['users'], async () => {
-        const response = await fetch('http://localhost:3000/api/users')
-        const responseJson = await response.json()
-
-        const users = responseJson.users.map(user => {
-            return {
-                id: user.id,
-                name: user.name,
-                createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric'
-                })
-            }
-        })
-        return users
-    })
+    const { isLoading, isFetching, data, error } = useUsers()
 
     return (
         <Box>
@@ -59,6 +44,9 @@ export default function UserList() {
                             fontWeight="normal"
                         >
                             Usuários
+                            { !isLoading && isFetching && (
+                                <Spinner size="sm" ml="4" />
+                            )}
                         </Heading>
                         <Link href="/users/create" passHref>
                             <Button
@@ -75,11 +63,11 @@ export default function UserList() {
                             <Flex justify="center">
                                 <Spinner />
                             </Flex>
-                        ) : error ? (
+                        ) : error  ? (
                             <Flex>
                                 <Text>Não foi possível obter dados</Text>
                             </Flex>
-                        ) : (
+                        ) : data ? (
                             <>
                                 <Table colorScheme="whiteAlpha">
                                     <Thead>
@@ -96,7 +84,7 @@ export default function UserList() {
                                         </Tr>
                                     </Thead>
                                     <Tbody>
-                                        { data.map(user => (
+                                        { data.map((user: IUser) => (
                                             <Tr key={user.id}>
                                                 <Td px="6" color="gray.300" width="8">
                                                     <Checkbox colorScheme="pink"  />
@@ -122,6 +110,8 @@ export default function UserList() {
                                     </Tbody>
                                 </Table>
                             </>
+                        ) : (
+                            <h1>Sem usuários</h1>
                         )
                     }
                     <Pagination />
