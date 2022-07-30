@@ -1,35 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1  align="center">
+    <img width="200px" src="public/logo.png" >
+</h1>
 
-## Getting Started
+<p align="center">
+  <img  src="https://img.shields.io/github/issues/Luis-Felipe-N/dashgo." alt="issues">
+  <img  src="https://img.shields.io/github/forks/Luis-Felipe-N/dashgo.?color=D53F8C&style=plastic" alt="forks">
+  <img  src="https://img.shields.io/github/stars/Luis-Felipe-N/dashgo.?color=D53F8C" alt="stars">
+</p>
 
-First, run the development server:
+<h4 align="center"> 
+	✔️ 🚀 Concluido  ✔️
+</h4>
+
+<p align="center">
+ <a href="#Tecnologias">Tecnologias</a> |
+ <a href="#Getting-started">Iniciar projeto</a> |
+ <a href="#autor">Autor</a>
+</p>
+
+
+![Portfólio](public/Capa.png)
+
+
+
+## Tecnologias
+
+Este projeto usou as seguinte tecnologias:
+
+- NextJS
+- Chakra UI
+- Mirage
+- React hook forms
+- React Query
+
+
+## Iniciar projeto
+
+Clone e projeto e entre na pasta.
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ git clone https://github.com/Luis-Felipe-N/dashgo..git
+$ cd dashgo.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Siga os passos abaixo: 
+```bash
+# Instale as dependencias
+$ yarn
+$ npm install
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# Iniciar projeto
+$ yarn start
+$ npm start
+```
+Este projeto estará acessível em http://localhost:3000
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Autor
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# dashgo.
+<p align="center" >Feito com ❤️ por Luis Felipe</p>
