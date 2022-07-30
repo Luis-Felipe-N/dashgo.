@@ -5,7 +5,7 @@ import { FieldError } from 'react-hook-form'
 interface IInputProps extends InputProps {
     name: string,
     label?: string,
-    error?: FieldError
+    error?: FieldError | undefined
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = ({label, name, error, ...rest}: IInputProps, ref) => {
