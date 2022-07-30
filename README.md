@@ -51,7 +51,7 @@ $ npm install
 
 # Iniciar projeto
 $ yarn start
-$ npm start
+$ npm run dev
 ```
 Este projeto estará acessível em http://localhost:3000
 
