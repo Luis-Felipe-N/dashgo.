@@ -41,8 +41,6 @@ export function makeServer() {
 
                 const users = schema.all('user').users.slice(startPage, endPage)
 
-
-
                 return new Response(
                     200, 
                     { 
