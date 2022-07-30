@@ -24,11 +24,11 @@ const createUserFormSchema = yup.object().shape({
 });
 
 export default function UserList() {
-    const { register, handleSubmit, formState } = useForm({
+    const { register, handleSubmit, formState } = useForm<CreateUserFormProps>({
         resolver: yupResolver(createUserFormSchema)
     })
 
-    const handleCreateUser: SubmitHandler<FieldValues> = async data => {
+    const handleCreateUser: SubmitHandler<CreateUserFormProps> = async data => {
         await new Promise(resolve => setTimeout(resolve, 2000))
         console.log(data)
     }
@@ -60,13 +60,13 @@ export default function UserList() {
                         <SimpleGrid minChildWidth={240} spacing="8" w="100%">
                            <Input
                               {...register("name")}
-                              error={formState.errors.name}
+                              error={formState.errors.name?.message}
                               name="name"
                               label="Nome do usuário"
                               />
                             <Input
                               {...register("email")}
-                              error={formState.errors.email}
+                              error={formState.errors.email?.message}
                               name="email"
                               type="email"
                               label="Email"
@@ -75,14 +75,14 @@ export default function UserList() {
                         <SimpleGrid minChildWidth={240} spacing="8" w="100%">
                             <Input
                               {...register("password")}
-                              error={formState.errors.password}
+                              error={formState.errors.password?.message}
                               name="password"
                               type="password"
                               label="Senha"
                               />
                             <Input
                               {...register("password_confimation")}
-                              error={formState.errors.password_confimation}
+                              error={formState.errors.password_confimation?.message}
                               name="password_confimation"
                               type="password"
                               label="Confirmação da senha" />

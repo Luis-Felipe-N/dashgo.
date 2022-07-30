@@ -39,13 +39,13 @@ export default function SignIn() {
             label="E-mail"
             type="email"
             {...register("email")}
-            error={formState.errors.email}
+            error={formState.errors.email?.message}
             />
           <Input
             label="Senha"
             type="password"
             {...register("password")}
-            error={formState.errors.password}
+            error={formState.errors.password?.message}
           />
         </Stack>
         <Button
